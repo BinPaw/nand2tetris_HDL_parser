@@ -50,7 +50,7 @@ class Parser:
     outputs = [output.strip() for output in outputs[0].split(',')]
 
     description = {
-      'inputs:': inputs,
+      'inputs': inputs,
       'outputs': outputs,
       'parts': parts
     }
