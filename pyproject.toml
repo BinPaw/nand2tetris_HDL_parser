@@ -40,9 +40,9 @@ max-complexity = 10
 branch = true
 source = [
     "tests",
-    "n2t/core",
-    "n2t/infra",
-    "n2t/runner",
+    "src/core",
+    "src/infra",
+    "src/runner",
 ]
 
 [tool.coverage.report]
