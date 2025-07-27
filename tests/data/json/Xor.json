@@ -1,0 +1,52 @@
+{
+  "outputs": [
+    "out"
+  ],
+  "parts": [
+    {
+      "name": "Not",
+      "vars": {
+        "in": "a",
+        "out": "na"
+      }
+    },
+    {
+      "name": "Not",
+      "vars": {
+        "in": "b",
+        "out": "nb"
+      }
+    },
+    {
+      "name": "And",
+      "vars": {
+        "a": "a",
+        "b": "b",
+        "out": "ab"
+      }
+    },
+    {
+      "name": "And",
+      "vars": {
+        "a": "na",
+        "b": "nb",
+        "out": "nanb"
+      }
+    },
+    {
+      "name": "Or",
+      "vars": {
+        "a": "ab",
+        "b": "nanb",
+        "out": "eq"
+      }
+    },
+    {
+      "name": "Not",
+      "vars": {
+        "in": "eq",
+        "out": "out"
+      }
+    }
+  ]
+}
