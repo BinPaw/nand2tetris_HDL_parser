@@ -33,7 +33,10 @@ def generate_output_file(input_file: Path, output_file: Path):
       f.write(f'|{'|'.join([f' {result[k][i]} ' for k in result.keys()])}|\n')
     
 
-def generate_output(input_dir: str, output_dir: str) -> None:
+def generate_output(
+    input_dir: str = 'tests/data/cmp',
+    output_dir: str = 'tests/data/out'
+  ) -> None:
   input_dir = Path(input_dir)
   output_dir = Path(output_dir)
   for file in input_dir.iterdir():
@@ -41,4 +44,4 @@ def generate_output(input_dir: str, output_dir: str) -> None:
       generate_output_file(file, output_dir / (file.stem + '.out'))
 
 if __name__ == '__main__':
-  generate_output('tests/data/cmp', 'tests/data/out')
+  generate_output()
