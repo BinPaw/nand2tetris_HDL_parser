@@ -16,13 +16,13 @@ update: ## Update project dependencies
 	poetry update
 
 format: ## Run code formatters
-	poetry run ruff format n2t tests
-	poetry run ruff check  n2t tests --fix
+	poetry run ruff format src tests scripts
+	poetry run ruff check  src tests scripts --fix
 
 lint: ## Run code linters
-	poetry run ruff format n2t tests --check
-	poetry run ruff check  n2t tests
-	poetry run mypy n2t tests
+	poetry run ruff format src tests scripts --check
+	poetry run ruff check  src tests scripts
+	poetry run mypy src tests scripts
 
 test:  ## Run tests with coverage
 	poetry run pytest --cov --last-failed --hypothesis-profile easy
