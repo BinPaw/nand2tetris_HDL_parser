@@ -43,10 +43,14 @@ class Parser:
             'vars': vars_dict
           })
 
-    outputs = re.findall(r'OUT\s+([\w,]+);', ''.join(lines))
+    inputs = re.findall(r'IN\s+([\w\s*,]+);', ''.join(lines))
+    inputs = [input.strip() for input in inputs[0].split(',')]
+    
+    outputs = re.findall(r'OUT\s+([\w\s*,]+);', ''.join(lines))
     outputs = [output.strip() for output in outputs[0].split(',')]
 
     description = {
+      'inputs:': inputs,
       'outputs': outputs,
       'parts': parts
     }
