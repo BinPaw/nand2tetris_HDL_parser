@@ -25,4 +25,4 @@ lint: ## Run code linters
 	poetry run mypy src tests scripts
 
 test:  ## Run tests with coverage
-	poetry run pytest --cov --last-failed --hypothesis-profile easy
+	poetry run pytest --cov --last-failed
