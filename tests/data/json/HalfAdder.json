@@ -1,0 +1,28 @@
+{
+  "inputs": [
+    "a",
+    "b"
+  ],
+  "outputs": [
+    "sum",
+    "carry"
+  ],
+  "parts": [
+    {
+      "name": "Xor",
+      "vars": {
+        "a": "a",
+        "b": "b",
+        "out": "sum"
+      }
+    },
+    {
+      "name": "And",
+      "vars": {
+        "a": "a",
+        "b": "b",
+        "out": "carry"
+      }
+    }
+  ]
+}

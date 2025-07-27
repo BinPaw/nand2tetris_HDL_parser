@@ -1,0 +1,35 @@
+{
+  "inputs": [
+    "in",
+    "sel"
+  ],
+  "outputs": [
+    "a",
+    "b"
+  ],
+  "parts": [
+    {
+      "name": "Not",
+      "vars": {
+        "in": "sel",
+        "out": "nsel"
+      }
+    },
+    {
+      "name": "And",
+      "vars": {
+        "a": "in",
+        "b": "nsel",
+        "out": "a"
+      }
+    },
+    {
+      "name": "And",
+      "vars": {
+        "a": "in",
+        "b": "sel",
+        "out": "b"
+      }
+    }
+  ]
+}

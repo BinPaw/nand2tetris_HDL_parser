@@ -1,0 +1,39 @@
+{
+  "inputs": [
+    "a",
+    "b",
+    "c"
+  ],
+  "outputs": [
+    "sum",
+    "carry"
+  ],
+  "parts": [
+    {
+      "name": "HalfAdder",
+      "vars": {
+        "a": "a",
+        "b": "b",
+        "sum": "s1",
+        "carry": "c1"
+      }
+    },
+    {
+      "name": "HalfAdder",
+      "vars": {
+        "a": "s1",
+        "b": "c",
+        "sum": "sum",
+        "carry": "c2"
+      }
+    },
+    {
+      "name": "HalfAdder",
+      "vars": {
+        "a": "c1",
+        "b": "c2",
+        "sum": "carry"
+      }
+    }
+  ]
+}
