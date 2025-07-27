@@ -14,7 +14,7 @@ def generate_output_file(input_file: Path, output_file: Path):
   
   vars = [var.strip() for var in lines[0].split('|')[1:-1]]
   for line in lines[1:]:
-    vals = [val.strip() for val in line.split('|')[1:-1]]
+    vals = [False if val.strip() == '0' else True for val in line.split('|')[1:-1]]
     input = {vars[i]: vals[i] for i in range(len(vars))}
     output = runner.generate_output(name, input)
     print(output)

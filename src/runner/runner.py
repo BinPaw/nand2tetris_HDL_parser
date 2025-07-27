@@ -10,6 +10,7 @@ class Runner:
   def run(self, parts: list[dict[str, str | dict[str, str]]], vars: dict[str, Bit]) -> None:
     vars['0'] = Bit(False)
     vars['1'] = Bit(True)
+    # print("vars: ", vars)
     for part in parts:
       part_name = part['name']
       part_vars = part['vars']
@@ -44,6 +45,8 @@ class Runner:
             vars[v] = Bit()
           next_vars[k] = vars[v]
         self.run(parts=next_parts, vars=next_vars)
+      # print("vars: ", vars)
+      
 
   def generate_output(self, name: str, input: dict[str, bool]) -> dict[str, bool]:
     parts = self.reader.read_parts(name)

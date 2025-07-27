@@ -13,3 +13,8 @@ class Bit:
 
   def Or(self, a: bool, b: bool) -> None:
     self.val = a or b
+
+  def __str__(self) -> str:
+    return f'Bit({self.val})'
+  
+  __repr__ = __str__
