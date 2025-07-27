@@ -35,8 +35,11 @@ def compare_files(cmp_file: Path, out_file: Path) -> None:
   for i in range(line_n):
     for var in vars:
       if out_dict[var][i] != cmp_dict[var][i]:
-        print(f'error in {name} output.\n'
-              f'output differs on line - {i}, variable - {var}')
+        print(f'mismatch in {name}.out\n'
+              f'output differs on line - {i}, '
+              f'variable - {var}\n'
+              f'expected \'{cmp_dict[var][i]}\', '
+              f'got \'{out_dict[var][i]}\'')
       assert out_dict[var][i] == cmp_dict[var][i]
 
 
