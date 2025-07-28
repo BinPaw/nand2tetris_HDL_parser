@@ -26,9 +26,7 @@ def generate_output_file(input_file: Path, output_file: Path) -> None:
         cur_result_b = input.copy()
         for k, v in output.items():
             cur_result_b[k] = v
-        cur_result: dict[str, str] = {
-            k: "1" if v else "0" for k, v in cur_result_b.items()
-        }
+        cur_result = {k: "1" if v else "0" for k, v in cur_result_b.items()}
 
         for k, vv in cur_result.items():
             result[k].append(vv)
