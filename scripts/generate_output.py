@@ -8,7 +8,7 @@ from pathlib import Path
 from src.runner.runner import Runner
 
 
-def generate_output_file(input_file: Path, output_file: Path):
+def generate_output_file(input_file: Path, output_file: Path) -> None:
     name = input_file.stem
     runner = Runner()
 
@@ -16,16 +16,16 @@ def generate_output_file(input_file: Path, output_file: Path):
         lines = f.readlines()
 
     vars = [var.strip() for var in lines[0].split("|")[1:-1]]
-    result = {k: [] for k in vars}
+    result: dict[str, list[str]] = {k: [] for k in vars}
     for line in lines[1:]:
         vals = [False if val.strip() == "0" else True for val in line.split("|")[1:-1]]
         input = {vars[i]: vals[i] for i in range(len(vars))}
         output = runner.generate_output(name, input)
 
-        cur_result = input.copy()
+        cur_result_b = input.copy()
         for k, v in output.items():
-            cur_result[k] = v
-        cur_result = {k: 1 if v else 0 for k, v in cur_result.items()}
+            cur_result_b[k] = v
+        cur_result = {k: ("1" if v else "0") for k, v in cur_result_b.items()}
 
         for k, v in cur_result.items():
             result[k].append(v)
@@ -43,11 +43,11 @@ def generate_output_file(input_file: Path, output_file: Path):
 def generate_output(
     input_dir: str = "tests/data/cmp", output_dir: str = "tests/data/out"
 ) -> None:
-    input_dir = Path(input_dir)
-    output_dir = Path(output_dir)
-    for file in input_dir.iterdir():
+    input_dir_p = Path(input_dir)
+    output_dir_p = Path(output_dir)
+    for file in input_dir_p.iterdir():
         if file.suffix == ".cmp":
-            generate_output_file(file, output_dir / (file.stem + ".out"))
+            generate_output_file(file, output_dir_p / (file.stem + ".out"))
 
 
 if __name__ == "__main__":

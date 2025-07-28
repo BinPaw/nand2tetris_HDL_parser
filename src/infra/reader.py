@@ -1,28 +1,35 @@
 import json
 from pathlib import Path
 
+from src.core.chip import Chip, Part
+
 
 class Reader:
     def __init__(self, input_dir: str) -> None:
         self.input_dir = Path(input_dir)
 
-    def read_chip(
-        self, name: str
-    ) -> dict[str, list[dict[str, str | dict[str, str]]] | list[str]]:
+    def read_chip(self, name: str) -> Chip:
         file = self.input_dir / (name + ".json")
-        description: dict[str, list[dict[str, str | dict[str, str]]] | list[str]] = {}
         with open(file, "r") as f:
             description = json.load(f)
-        return description
+        chip = Chip(
+            inputs=description["inputs"],
+            outputs=description["outputs"],
+            parts=[
+                Part(name=part["name"], vars=part["vars"])
+                for part in description["parts"]
+            ],
+        )
+        return chip
 
-    def read_parts(self, name: str) -> list[dict[str, str | dict[str, str]]]:
-        parts: list[dict[str, str | dict[str, str]]] = self.read_chip(name)["parts"]
-        return parts
+    def read_parts(self, name: str) -> list[Part]:
+        chip = self.read_chip(name)
+        return chip.parts
 
     def read_outputs(self, name: str) -> list[str]:
-        outputs: list[str] = self.read_chip(name)["outputs"]
-        return outputs
+        chip = self.read_chip(name)
+        return chip.outputs
 
     def read_inputs(self, name: str) -> list[str]:
-        inputs: list[str] = self.read_chip(name)["inputs"]
-        return inputs
+        chip = self.read_chip(name)
+        return chip.inputs

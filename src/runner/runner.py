@@ -1,4 +1,5 @@
 from src.core.bit import Bit
+from src.core.chip import Part
 from src.infra.reader import Reader
 
 
@@ -8,15 +9,13 @@ class Runner:
             reader = Reader("tests/data/json")
         self.reader = reader
 
-    def run(
-        self, parts: list[dict[str, str | dict[str, str]]], vars: dict[str, Bit]
-    ) -> None:
+    def run(self, parts: list[Part], vars: dict[str, Bit]) -> None:
         vars["0"] = Bit(False)
         vars["1"] = Bit(True)
         # print("vars: ", vars)
         for part in parts:
-            part_name = part["name"]
-            part_vars = part["vars"]
+            part_name = part.name
+            part_vars = part.vars
             if part_name == "Nand":
                 a = vars[part_vars["a"]].val
                 b = vars[part_vars["b"]].val
