@@ -16,7 +16,7 @@ def parse_file(file: Path) -> dict[str, list[str]]:
     return parsed
 
 
-def compare_files(cmp_file: Path, out_file: Path) -> None:
+def compare_files(cmp_file: Path, out_file: Path) -> bool:
     name = cmp_file.stem
 
     print(f"\nchecking output for chip '{name}'")
@@ -29,8 +29,7 @@ def compare_files(cmp_file: Path, out_file: Path) -> None:
 
     if out_vars != cmp_vars:
         print(f"list of variables do not match.\nexpected {cmp_vars}, got {out_vars}")
-
-    assert out_vars == cmp_vars
+        return False
 
     print("variables check passed")
 
@@ -43,7 +42,7 @@ def compare_files(cmp_file: Path, out_file: Path) -> None:
                 f"column size for variable {var} is wrong\n"
                 f"expected {line_n}, got {len(out_dict[var])}"
             )
-        assert len(out_dict[var]) == line_n
+            return False
 
     print("column size check passed")
 
@@ -57,11 +56,12 @@ def compare_files(cmp_file: Path, out_file: Path) -> None:
                     f"expected '{cmp_dict[var][i]}', "
                     f"got '{out_dict[var][i]}'"
                 )
-            assert out_dict[var][i] == cmp_dict[var][i]
+                return False
 
     print("values check passed")
 
     print(f"all checks passed for chip '{name}'")
+    return True
 
 
 def test_outputs() -> None:
@@ -73,13 +73,17 @@ def test_outputs() -> None:
     out_dir = Path("tests/data/out")
 
     test_cnt = 0
+    passed_cnt = 0
 
     for cmp_file in cmp_dir.iterdir():
         if cmp_file.suffix == ".cmp":
             out_file = out_dir / (cmp_file.stem + ".out")
-            compare_files(cmp_file, out_file)
+            if compare_files(cmp_file, out_file):
+                passed_cnt += 1
             test_cnt += 1
 
-    print(f"\n{test_cnt}/{test_cnt} tests passed")
+    print(f"\n{passed_cnt}/{test_cnt} tests passed")
     print("\nremoving output directory")
     remove_output()
+
+    assert passed_cnt == test_cnt
