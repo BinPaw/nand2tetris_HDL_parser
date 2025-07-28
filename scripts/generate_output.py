@@ -3,6 +3,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
+import shutil
 from pathlib import Path
 
 from src.runner.runner import Runner
@@ -47,9 +48,15 @@ def generate_output(
 ) -> None:
     input_dir_p = Path(input_dir)
     output_dir_p = Path(output_dir)
+    output_dir_p.mkdir(parents=True, exist_ok=True)
     for file in input_dir_p.iterdir():
         if file.suffix == ".cmp":
             generate_output_file(file, output_dir_p / (file.stem + ".out"))
+
+
+def remove_output(output_dir: str = "tests/data/out") -> None:
+    output_dir_p = Path(output_dir)
+    shutil.rmtree(output_dir_p)
 
 
 if __name__ == "__main__":

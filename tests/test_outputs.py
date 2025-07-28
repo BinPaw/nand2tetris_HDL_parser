@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from scripts.generate_output import generate_output
+from scripts.generate_output import generate_output, remove_output
 
 
 def parse_file(file: Path) -> dict[str, list[str]]:
@@ -56,3 +56,5 @@ def test_outputs() -> None:
         if cmp_file.suffix == ".cmp":
             out_file = out_dir / (cmp_file.stem + ".out")
             compare_files(cmp_file, out_file)
+
+    remove_output()
