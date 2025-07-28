@@ -2,16 +2,16 @@ class Bit:
     def __init__(self, val: bool = False) -> None:
         self.val = val
 
-    def Nand(self, a: bool, b: bool) -> None:
+    def nand_(self, a: bool, b: bool) -> None:
         self.val = not (a and b)
 
-    def Not(self, a: bool) -> None:
+    def not_(self, a: bool) -> None:
         self.val = not a
 
-    def And(self, a: bool, b: bool) -> None:
+    def and_(self, a: bool, b: bool) -> None:
         self.val = a and b
 
-    def Or(self, a: bool, b: bool) -> None:
+    def or_(self, a: bool, b: bool) -> None:
         self.val = a or b
 
     def __str__(self) -> str:
