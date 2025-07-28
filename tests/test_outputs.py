@@ -72,11 +72,14 @@ def test_outputs() -> None:
     cmp_dir = Path("tests/data/cmp")
     out_dir = Path("tests/data/out")
 
+    test_cnt = 0
+
     for cmp_file in cmp_dir.iterdir():
         if cmp_file.suffix == ".cmp":
             out_file = out_dir / (cmp_file.stem + ".out")
             compare_files(cmp_file, out_file)
+            test_cnt += 1
 
-    print("\nevery check passed")
+    print(f"\n{test_cnt}/{test_cnt} tests passed")
     print("\nremoving output directory")
     remove_output()
