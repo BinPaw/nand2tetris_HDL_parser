@@ -39,7 +39,7 @@ def compare_files(cmp_file: Path, out_file: Path) -> bool:
     for var in vars:
         if len(out_dict[var]) != line_n:
             print(
-                f"column size for variable {var} is wrong\n"
+                f"column size for variable '{var}' is wrong\n"
                 f"expected {line_n}, got {len(out_dict[var])}"
             )
             return False
@@ -50,9 +50,9 @@ def compare_files(cmp_file: Path, out_file: Path) -> bool:
         for var in vars:
             if out_dict[var][i] != cmp_dict[var][i]:
                 print(
-                    f"mismatch in {name}.out\n"
-                    f"output differs on line - {i}, "
-                    f"variable - {var}\n"
+                    f"value mismatch\n"
+                    f"output differs on line - {i + 1}, "
+                    f"variable - '{var}'\n"
                     f"expected '{cmp_dict[var][i]}', "
                     f"got '{out_dict[var][i]}'"
                 )
