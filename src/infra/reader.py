@@ -1,25 +1,19 @@
-import json
 from pathlib import Path
 
 from src.core.chip import Chip, Part
+from src.core.parser import Parser
 
 
 class Reader:
-    def __init__(self, input_dir: str) -> None:
+    def __init__(self, input_dir: str = "tests/data/HDL") -> None:
         self.input_dir = Path(input_dir)
+        self.parser = Parser()
 
     def read_chip(self, name: str) -> Chip:
-        file = self.input_dir / (name + ".json")
+        file = self.input_dir / (name + ".hdl")
         with open(file, "r") as f:
-            description = json.load(f)
-        chip = Chip(
-            inputs=description["inputs"],
-            outputs=description["outputs"],
-            parts=[
-                Part(name=part["name"], vars=part["vars"])
-                for part in description["parts"]
-            ],
-        )
+            lines = f.readlines()
+        chip = self.parser.parse(lines)
         return chip
 
     def read_parts(self, name: str) -> list[Part]:

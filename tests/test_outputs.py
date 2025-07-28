@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from scripts.generate_json import generate_json
 from scripts.generate_output import generate_output
 
 
@@ -48,7 +47,6 @@ def compare_files(cmp_file: Path, out_file: Path) -> None:
 
 
 def test_outputs() -> None:
-    generate_json()
     generate_output()
 
     cmp_dir = Path("tests/data/cmp")

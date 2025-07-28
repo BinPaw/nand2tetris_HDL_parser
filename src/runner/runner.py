@@ -6,7 +6,7 @@ from src.infra.reader import Reader
 class Runner:
     def __init__(self, reader: Reader | None = None) -> None:
         if not reader:
-            reader = Reader("tests/data/json")
+            reader = Reader()
         self.reader = reader
 
     def run(self, parts: list[Part], vars: dict[str, Bit]) -> None:

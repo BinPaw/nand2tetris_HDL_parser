@@ -1,25 +1,10 @@
-import json
 import re
-from pathlib import Path
+
+from src.core.chip import Chip, Part
 
 
 class Parser:
-    def __init__(self, input_dir: str, output_dir: str) -> None:
-        self.input_dir = Path(input_dir)
-        self.output_dir = Path(output_dir)
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-
-    def parse(self) -> None:
-        for file in self.input_dir.iterdir():
-            if file.suffix == ".hdl":
-                self.parse_file(
-                    input_file=file, output_file=self.output_dir / (file.stem + ".json")
-                )
-
-    def parse_file(self, input_file: Path, output_file: Path) -> None:
-        with open(input_file, "r") as f:
-            lines = f.readlines()
-
+    def parse(self, lines: list[str]) -> Chip:
         parts_section = False
         parts = []
         for line in lines:
@@ -51,5 +36,13 @@ class Parser:
 
         description = {"inputs": inputs, "outputs": outputs, "parts": parts}
 
-        with open(output_file, "w") as f:
-            json.dump(description, f, indent=2)
+        chip = Chip(
+            inputs=description["inputs"],
+            outputs=description["outputs"],
+            parts=[
+                Part(name=part["name"], vars=part["vars"])
+                for part in description["parts"]
+            ],
+        )
+
+        return chip
