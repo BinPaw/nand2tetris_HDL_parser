@@ -16,11 +16,15 @@ def generate_output_file(input_file: Path, output_file: Path) -> None:
     with open(input_file, "r") as f:
         lines = f.readlines()
 
-    vars = [var.strip() for var in lines[0].split("|")[1:-1]]
-    result: dict[str, list[str]] = {k: [] for k in vars}
+    input_vars = [var.strip() for var in lines[0].split(";")[0].split(",")]
+    output_vars = [var.strip() for var in lines[0].split(";")[1].split(",")]
+    result: dict[str, list[str]] = {k: [] for k in input_vars + output_vars}
     for line in lines[1:]:
-        vals = [False if val.strip() == "0" else True for val in line.split("|")[1:-1]]
-        input = {vars[i]: vals[i] for i in range(len(vars))}
+        input_vals = [
+            False if val.strip() == "0" else True
+            for val in line.split(";")[0].split(",")
+        ]
+        input = {input_vars[i]: input_vals[i] for i in range(len(input_vars))}
         output = runner.generate_output(name, input)
 
         cur_result_b = input.copy()
@@ -32,13 +36,12 @@ def generate_output_file(input_file: Path, output_file: Path) -> None:
             result[k].append(vv)
 
     with open(output_file, "w") as f:
-        f.write(
-            f"|{
-                '|'.join([key if len(key) > 1 else f' {key} ' for key in result.keys()])
-            }|\n"
-        )
+        f.write(f"{','.join(input_vars)}; {','.join(output_vars)}\n")
         for i in range(len(lines) - 1):
-            f.write(f"|{'|'.join([f' {result[k][i]} ' for k in result.keys()])}|\n")
+            f.write(
+                f"{','.join([f'{result[k][i]}' for k in input_vars])}; "
+                f"{','.join([f'{result[k][i]}' for k in output_vars])}\n"
+            )
 
 
 def generate_output(

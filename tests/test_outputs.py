@@ -7,10 +7,10 @@ def parse_file(file: Path) -> dict[str, list[str]]:
     with open(file, "r") as f:
         lines = f.readlines()
 
-    vars = [var.strip() for var in lines[0].split("|")[1:-1]]
+    vars = [var.strip() for var in lines[0].replace(";", ",").split(",")]
     parsed: dict[str, list[str]] = {var: [] for var in vars}
     for line in lines[1:]:
-        for idx, val in enumerate(line.split("|")[1:-1]):
+        for idx, val in enumerate(line.replace(";", ",").split(",")):
             parsed[vars[idx]].append(val.strip())
 
     return parsed
