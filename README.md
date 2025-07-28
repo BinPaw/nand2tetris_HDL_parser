@@ -37,9 +37,9 @@ nand_final_HDL/
 
 ## Getting Started
 
-### 1. Install Dependencies
-
 This project uses [Poetry](https://python-poetry.org/) for dependency management.
+
+### 1. Install Dependencies
 
 ```sh
 make install
