@@ -1,20 +1,20 @@
 class Bit:
-  def __init__(self, val: bool = False) -> None:
-    self.val = val
+    def __init__(self, val: bool = False) -> None:
+        self.val = val
 
-  def Nand(self, a: bool, b: bool) -> None:
-    self.val = not (a and b)
+    def Nand(self, a: bool, b: bool) -> None:
+        self.val = not (a and b)
 
-  def Not(self, a: bool) -> None:
-    self.val = not a
+    def Not(self, a: bool) -> None:
+        self.val = not a
 
-  def And(self, a: bool, b: bool) -> None:
-    self.val = a and b
+    def And(self, a: bool, b: bool) -> None:
+        self.val = a and b
 
-  def Or(self, a: bool, b: bool) -> None:
-    self.val = a or b
+    def Or(self, a: bool, b: bool) -> None:
+        self.val = a or b
 
-  def __str__(self) -> str:
-    return f'Bit({self.val})'
-  
-  __repr__ = __str__
+    def __str__(self) -> str:
+        return f"Bit({self.val})"
+
+    __repr__ = __str__
