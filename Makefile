@@ -1,9 +1,3 @@
-.PHONY: help
-.DEFAULT_GOAL := help
-
-help:
-	python -m n2t --help
-
 install: ## Install requirements
 	python -m pip install --upgrade pip
 	python -m pip install --upgrade poetry
