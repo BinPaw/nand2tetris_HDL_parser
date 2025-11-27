@@ -101,4 +101,4 @@ dmypy.json
 .idea
 .vscode
 
-/tests/e2e/nand2tetris
+/tests/data/out/
