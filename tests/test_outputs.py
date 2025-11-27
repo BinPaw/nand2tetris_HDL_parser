@@ -83,7 +83,8 @@ def test_outputs() -> None:
             test_cnt += 1
 
     print(f"\n{passed_cnt}/{test_cnt} tests passed")
-    print("\nremoving output directory")
-    remove_output()
 
     assert passed_cnt == test_cnt
+    
+    print("\nremoving output directory")
+    remove_output()
