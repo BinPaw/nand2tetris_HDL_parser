@@ -20,3 +20,6 @@ lint: ## Run code linters
 
 test:  ## Run tests with coverage
 	poetry run pytest -s --cov --last-failed
+
+outputs:
+	poetry run python scripts/generate_output.py
